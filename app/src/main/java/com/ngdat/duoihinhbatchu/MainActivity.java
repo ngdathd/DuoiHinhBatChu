@@ -1,9 +1,10 @@
 package com.ngdat.duoihinhbatchu;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
@@ -16,6 +17,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(this,PlayActivity.class));
+        startActivity(new Intent(this, PlayActivity.class));
     }
 }

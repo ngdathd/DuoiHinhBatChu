@@ -1,9 +1,6 @@
 package com.ngdat.duoihinhbatchu;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,17 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class PlayActivity extends Activity {
-    private static final int CHECK_ANWSER = 0;
-    private static final int GAME_OVER = 1;
+public class PlayActivity extends AppCompatActivity {
     private int heart;
     private int point;
-    private Handler handler;
     private Button btntiep;
     private TextView txtHeart;
     private TextView txtPoint;
@@ -39,50 +35,8 @@ public class PlayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        initComponets();
+        initComponents();
         makeQuestion();
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                switch (msg.what) {
-                    case CHECK_ANWSER:
-                        if (checkAnwser()) {
-                            Toast.makeText(PlayActivity.this, "Thiên tài !", Toast.LENGTH_SHORT).show();
-                            point += 100;
-                            txtPoint.setText(point + "");
-                            for (int i = 16; i < dapan.length() + 16; i++) {
-                                ((Button) findViewById(i)).setBackgroundResource(R.drawable.ic_tile_true);
-                                ((Button) findViewById(i)).setClickable(false);
-                            }
-                            btntiep.setVisibility(View.VISIBLE);
-                        } else {
-                            heart--;
-                            txtHeart.setText(heart + "");
-                            if (heart <= 0) {
-                                handler.sendEmptyMessage(GAME_OVER);
-                                return;
-                            }
-                            Toast.makeText(PlayActivity.this, "Đáp án sai !", Toast.LENGTH_SHORT).show();
-
-                            for (int i = 16; i < dapan.length() + 16; i++) {
-                                ((Button) findViewById(i)).setBackgroundResource(R.drawable.ic_tile_false);
-                            }
-                            if (heart <= 0) {
-                                handler.sendEmptyMessage(GAME_OVER);
-                            }
-
-                        }
-                        break;
-                    case GAME_OVER:
-                        Toast.makeText(PlayActivity.this, "GAME OVER", Toast.LENGTH_SHORT).show();
-                        finish();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
     }
 
     private void makeQuestion() {
@@ -100,7 +54,7 @@ public class PlayActivity extends Activity {
                         if (((Button) view).getText() != "") {
                             ((Button) view).setText("");
                             for (int i = 0; i < listChar.size(); i++) {
-                                if (listChar.get(i).getIdAnwser() == view.getId()) {
+                                if (listChar.get(i).getIdAnswer() == view.getId()) {
                                     ((Button) findViewById(listChar.get(i).getIdPick())).setVisibility(View.VISIBLE);
                                     listChar.remove(i);
                                     break;
@@ -124,7 +78,7 @@ public class PlayActivity extends Activity {
                         if (((Button) view).getText() != "") {
                             ((Button) view).setText("");
                             for (int i = 0; i < listChar.size(); i++) {
-                                if (listChar.get(i).getIdAnwser() == view.getId()) {
+                                if (listChar.get(i).getIdAnswer() == view.getId()) {
                                     ((Button) findViewById(listChar.get(i).getIdPick())).setVisibility(View.VISIBLE);
                                     listChar.remove(i);
                                     break;
@@ -149,7 +103,7 @@ public class PlayActivity extends Activity {
                         if (((Button) view).getText() != "") {
                             ((Button) view).setText("");
                             for (int i = 0; i < listChar.size(); i++) {
-                                if (listChar.get(i).getIdAnwser() == view.getId()) {
+                                if (listChar.get(i).getIdAnswer() == view.getId()) {
                                     ((Button) findViewById(listChar.get(i).getIdPick())).setVisibility(View.VISIBLE);
                                     listChar.remove(i);
                                     break;
@@ -167,7 +121,7 @@ public class PlayActivity extends Activity {
         imgPicture.setImageResource(qs.getId());
 
         String[] kt = {"a", "b", "c", "d", "e", "g", "h", "i", "k", "l", "m", "n", "o", "u", "q", "p", "r", "s", "t", "y", "v", "x"};
-        List<String> tl = new ArrayList();
+        List<String> tl = new ArrayList<>();
 
         for (int i = 0; i < dapan.length(); i++) {
             tl.add(dapan.charAt(i) + "");
@@ -212,8 +166,8 @@ public class PlayActivity extends Activity {
         }
     }
 
-    private void initComponets() {
-        listChar = new ArrayList();
+    private void initComponents() {
+        listChar = new ArrayList<>();
         heart = 5;
         point = 0;
         random = new Random();
@@ -233,8 +187,8 @@ public class PlayActivity extends Activity {
         txtHeart = (TextView) findViewById(R.id.txt_heart);
         txtPoint = (TextView) findViewById(R.id.txt_point);
 
-        txtHeart.setText(heart + "");
-        txtPoint.setText(point + "");
+        txtHeart.setText(String.valueOf(heart));
+        txtPoint.setText(String.valueOf(point));
 
         listQuestions = new ArrayList<>();
         listQuestions.add(new Question(R.drawable.aomua, "aomua"));
@@ -290,7 +244,29 @@ public class PlayActivity extends Activity {
 
                 pst++;
                 if (pst == dapan.length()) {
-                    handler.sendEmptyMessage(CHECK_ANWSER);
+                    if (checkAnswer()) {
+                        Toast.makeText(PlayActivity.this, "Thiên tài !", Toast.LENGTH_SHORT).show();
+                        point += 100;
+                        txtPoint.setText(String.valueOf(point));
+                        for (int j = 16; j < dapan.length() + 16; j++) {
+                            ((Button) findViewById(j)).setBackgroundResource(R.drawable.ic_tile_true);
+                            ((Button) findViewById(j)).setClickable(false);
+                        }
+                        btntiep.setVisibility(View.VISIBLE);
+                    } else {
+                        heart--;
+                        txtHeart.setText(String.valueOf(heart));
+                        if (heart <= 0) {
+                            Toast.makeText(PlayActivity.this, "GAME OVER", Toast.LENGTH_SHORT).show();
+                            finish();
+                            return;
+                        }
+                        Toast.makeText(PlayActivity.this, "Đáp án sai !", Toast.LENGTH_SHORT).show();
+
+                        for (int k = 16; k < dapan.length() + 16; k++) {
+                            ((Button) findViewById(k)).setBackgroundResource(R.drawable.ic_tile_false);
+                        }
+                    }
                 }
                 return;
             }
@@ -298,14 +274,11 @@ public class PlayActivity extends Activity {
 
     }
 
-    public boolean checkAnwser() {
-        String da = "";
+    public boolean checkAnswer() {
+        StringBuilder da = new StringBuilder();
         for (int i = 16; i < dapan.length() + 16; i++) {
-            da += ((Button) findViewById(i)).getText();
+            da.append(((Button) findViewById(i)).getText());
         }
-        if (da.equals(dapan)) {
-            return true;
-        } else
-            return false;
+        return da.toString().equals(dapan);
     }
 }

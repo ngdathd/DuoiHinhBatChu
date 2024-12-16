@@ -1,135 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_game_play"
+    android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="10dp">
+
     <RelativeLayout
         android:id="@+id/top"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
         <ImageView
             android:layout_width="54dp"
             android:layout_height="45dp"
-            android:src="@drawable/ic_avatar"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_avatar" />
+
         <RelativeLayout
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/bg_avatar"
             android:layout_width="150dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/bg_avatar">
+
             <TextView
                 android:id="@+id/txt_heart"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textColor="#ffffff"
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="7dp"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="7dp"
                 android:background="@drawable/ic_heart"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/txt_point"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:text="1493"
-            android:paddingTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_marginLeft="10dp"
             android:background="@drawable/bg_coin"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </TextView>
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="6dp"
+            android:text="1493"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
+
     <Button
         android:id="@+id/btn_tiep"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:text="câu tiếp"
-        android:visibility="invisible"
-        android:textSize="18sp"
         android:layout_below="@+id/top"
-        android:gravity="center"
         android:layout_centerInParent="true"
-        android:background="@drawable/bg_next"/>
+        android:background="@drawable/bg_next"
+        android:gravity="center"
+        android:text="câu tiếp"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/img_picture"
-        android:layout_marginTop="113dp"
         android:layout_width="340dp"
         android:layout_height="215dp"
-        android:src="@drawable/cattuong"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="113dp"
         android:scaleType="centerCrop"
-        android:layout_centerHorizontal="true"/>
+        android:src="@drawable/cattuong" />
+
     <RelativeLayout
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
         android:id="@+id/rl_image"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:layout_marginTop="110dp"
-        android:background="@drawable/bg_picture_border">
+        android:background="@drawable/bg_picture_border"
+        android:gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
 
     </RelativeLayout>
 
     <LinearLayout
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:id="@+id/ln_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ln_3"
         android:layout_below="@+id/rl_image"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
         <LinearLayout
             android:id="@+id/anwser1"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"></LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal" />
+
         <LinearLayout
             android:id="@+id/anwser2"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"></LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal" />
     </LinearLayout>
 
     <LinearLayout
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/ln_3"
-        android:layout_above="@+id/ln_4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
-    </LinearLayout>
-
+        android:layout_above="@+id/ln_4"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin" />
 
     <LinearLayout
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/ln_4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-    </LinearLayout>
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin" />
 </RelativeLayout>

@@ -2,10 +2,10 @@ package com.ngdat.duoihinhbatchu;
 
 
 public class IDButton {
-    private int idAnwser, idPick;
+    private int idAnswer, idPick;
 
-    public IDButton(int idPick, int idAnwser) {
-        this.idAnwser = idAnwser;
+    public IDButton(int idPick, int idAnswer) {
+        this.idAnswer = idAnswer;
         this.idPick = idPick;
     }
 
@@ -13,7 +13,7 @@ public class IDButton {
         return idPick;
     }
 
-    public int getIdAnwser() {
-        return idAnwser;
+    public int getIdAnswer() {
+        return idAnswer;
     }
 }
